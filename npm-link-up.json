@@ -9,6 +9,7 @@
   ],
   "list": [
     "suman-types",
+    "suman-reporters",
     "tap-json-parser"
   ]
 }

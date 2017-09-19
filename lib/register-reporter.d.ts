@@ -1,1 +1,1 @@
-export declare const registerReporter: () => void;
+export declare const registerReporter: (name: string) => void;
