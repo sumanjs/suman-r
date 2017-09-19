@@ -10,11 +10,10 @@ export const getStream = function (type: string) {
 
   p = parser();
 
-  p.on('data', function(d){
-    console.log('data is => ', d);
-  });
 
   p.on('testpoint', function (testpoint: Object) {
+
+    console.log('here is a testpoint');
 
     tb.emit(String(events.TEST_CASE_END), testpoint);
 

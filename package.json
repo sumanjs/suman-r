@@ -38,6 +38,7 @@
     "suman-types": "0.0.1002"
   },
   "dependencies": {
+    "dashdash": "^1.14.1",
     "suman-events": "0.0.113",
     "tap-json-parser": "latest"
   }
