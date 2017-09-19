@@ -1,0 +1,29 @@
+{
+  "name": "suman-r",
+  "version": "0.0.1001",
+  "description": "Suman reporter CLI / writable pipe",
+  "main": "index.js",
+  "scripts": {
+    "test": "suman"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sumanjs/suman-r.git"
+  },
+  "keywords": [
+    "suman",
+    "sumanjs",
+    "testing",
+    "tap",
+    "TAP",
+    "streaming",
+    "pipe",
+    "text"
+  ],
+  "author": "Olegzandr VD",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sumanjs/suman-r/issues"
+  },
+  "homepage": "https://github.com/sumanjs/suman-r#readme"
+}
