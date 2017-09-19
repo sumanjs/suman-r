@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/sumanjs/suman-r/issues"
   },
-  "homepage": "https://github.com/sumanjs/suman-r#readme"
+  "homepage": "https://github.com/sumanjs/suman-r#readme",
+  "devDependencies": {
+    "suman-types": "0.0.1002"
+  }
 }

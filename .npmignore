@@ -1,0 +1,20 @@
+
+# matching files
+*.log
+*.ts
+*.json
+*.sh
+*.txt
+*.md
+
+# individual files
+.gitignore
+.npmignore
+.editorconfig
+
+# directories
+node_modules
+.idea
+
+# inverse
+!*.d.ts
