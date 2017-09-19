@@ -11,10 +11,12 @@
 .gitignore
 .npmignore
 .editorconfig
+suman.conf.js
 
 # directories
 node_modules
 .idea
+test
 
 # inverse
 !*.d.ts

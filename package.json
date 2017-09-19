@@ -2,7 +2,12 @@
   "name": "suman-r",
   "version": "0.0.1001",
   "description": "Suman reporter CLI / writable pipe",
+  "bin": {
+    "suman-r": "index.js"
+  },
   "main": "index.js",
+  "types": "index.d.ts",
+  "typings": "index.d.ts",
   "scripts": {
     "test": "suman"
   },
@@ -27,6 +32,13 @@
   },
   "homepage": "https://github.com/sumanjs/suman-r#readme",
   "devDependencies": {
+    "@types/core-js": "^0.9.43",
+    "@types/node": "^8.0.28",
+    "suman": "^1.1.512243",
     "suman-types": "0.0.1002"
+  },
+  "dependencies": {
+    "suman-events": "0.0.113",
+    "tap-json-parser": "latest"
   }
 }
