@@ -4,7 +4,7 @@
   "description": "Suman reporter CLI / writable pipe",
   "bin": {
     "suman-r": "index.js",
-    "suman-r-inspect":"cli/inspect.sh"
+    "suman-r-inspect": "cli/inspect.sh"
   },
   "main": "index.js",
   "types": "index.d.ts",
@@ -33,12 +33,15 @@
   },
   "homepage": "https://github.com/sumanjs/suman-r#readme",
   "dependencies": {
+    "chalk": "^2.1.0",
     "dashdash": "^1.14.1",
     "suman-events": "latest",
     "suman-reporters": "latest",
+    "suman-utils": "0.0.73117",
     "tap-json-parser": "latest"
   },
   "devDependencies": {
+    "@types/chalk": "^0.4.31",
     "@types/core-js": "^0.9.43",
     "@types/node": "^8.0.28",
     "suman-types": "latest"

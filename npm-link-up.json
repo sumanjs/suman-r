@@ -8,8 +8,10 @@
     "/.git/"
   ],
   "list": [
+    "suman-events",
     "suman-types",
     "suman-reporters",
+    "suman-utils",
     "tap-json-parser"
   ]
 }

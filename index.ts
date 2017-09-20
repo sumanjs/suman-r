@@ -1,5 +1,12 @@
 #!/usr/bin/env node
 
+import su from 'suman-utils';
+
+process.on('uncaughtException', function (e) {
+  console.error(`<suman-r> has captured an 'uncaughtException' => \n ${su.getCleanErrorString(e)}`);
+});
+
+
 import dashdash = require('dashdash');
 import {getStream} from "./lib/get-stream";
 import {registerReporter} from './lib/register-reporter';

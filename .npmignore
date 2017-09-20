@@ -1,5 +1,6 @@
 
 # matching files
+
 *.log
 *.ts
 *.json
@@ -8,15 +9,20 @@
 *.md
 
 # individual files
+
 .gitignore
 .npmignore
 .editorconfig
 suman.conf.js
 
 # directories
+
 node_modules
 .idea
 test
+coverage
+.nyc_output
 
-# inverse
+# inverse / negation
+
 !*.d.ts

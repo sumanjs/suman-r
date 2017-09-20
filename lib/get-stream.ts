@@ -13,6 +13,8 @@ export const getStream = function (type: string) {
 
   p.on('testpoint', function (testpoint: Object) {
 
+    debugger;
+
     tb.emit(String(events.TEST_CASE_END), testpoint);
 
     if (testpoint.skip) {

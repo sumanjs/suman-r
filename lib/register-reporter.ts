@@ -1,5 +1,7 @@
 import {tb} from "./testpoint-broadcaster";
 import {events} from 'suman-events';
+import su from 'suman-utils';
+import chalk = require('chalk');
 
 export const registerReporter = function (name: string) {
 
@@ -15,7 +17,7 @@ export const registerReporter = function (name: string) {
   }
   catch (err) {
     pth = `suman-reporters/modules/${name}`;
-    console.log(`reporter being loaded with the following resolved name ${pth}.`);
+    console.log(`reporter being loaded with the following resolved name '${chalk.magenta(pth)}'.`);
     reporterFn = require(pth);
   }
 
@@ -25,19 +27,7 @@ export const registerReporter = function (name: string) {
 
   debugger;
   reporterFn = reporterFn.default || reporterFn;
-  reporterFn.call(null, tb);
-
-  // tb.on(String(events.TEST_CASE_END), function (data) {
-  //   console.log('test case end');
-  // });
-  //
-  // tb.on(String(events.TEST_CASE_PASS), function (data) {
-  //   console.log('test case pass');
-  // });
-  //
-  // tb.on(String(events.TEST_CASE_FAIL), function (data) {
-  //   console.log('test case fail');
-  // });
+  reporterFn.call(null, tb, {}, {}, su);
 
 };
 
