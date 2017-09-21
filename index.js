@@ -11,6 +11,7 @@ process.on('unhandledRejection', function (e) {
 process.once('exit', function () {
     console.log(' ---- suman-r end ----');
 });
+var chalk = require("chalk");
 var dashdash = require("dashdash");
 var get_stream_1 = require("./lib/get-stream");
 var register_reporter_1 = require("./lib/register-reporter");
@@ -30,8 +31,16 @@ var d = Domain.create();
 d.on('error', function (e) {
     console.log(suman_utils_1.default.getCleanErrorString(e));
 });
+var to = setTimeout(function () {
+    console.error(chalk.red('no input to suman-r stdin after 10 seconds, shutting down.'));
+    process.exit(1);
+}, 5000);
+var clearStdinTimeout = function () {
+    clearTimeout(to);
+};
 d.run(function () {
     process.stdin.resume().pipe(get_stream_1.getStream('zoom'))
+        .once('data', clearStdinTimeout)
         .on('error', function (e) {
         console.log(suman_utils_1.default.getCleanErrorString(e));
     });

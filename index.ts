@@ -40,19 +40,19 @@ d.on('error', function (e) {
   console.log(su.getCleanErrorString(e));
 });
 
-// const to = setTimeout(function () {
-//   console.error(chalk.red('no input to suman-r stdin after 10 seconds, shutting down.'));
-//   process.exit(1);
-// }, 10000);
-//
-// let clearStdinTimeout = function () {
-//   clearTimeout(to);
-// };
+const to = setTimeout(function () {
+  console.error(chalk.red('no input to suman-r stdin after 10 seconds, shutting down.'));
+  process.exit(1);
+}, 5000);
+
+let clearStdinTimeout = function () {
+  clearTimeout(to);
+};
 
 d.run(function () {
   // we use a domain because nothing else seemed to capture the errors properly
   process.stdin.resume().pipe(getStream('zoom'))
-  // .once('data', clearStdinTimeout)
+  .once('data', clearStdinTimeout)
   .on('error', function (e) {
     console.log(su.getCleanErrorString(e));
   });
