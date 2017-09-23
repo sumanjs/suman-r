@@ -15,6 +15,7 @@ module.exports = {
 
   //string
   testDir: 'test',
+  testSrcDir: 'test/all',
   sumanHelpersDir: 'test/.suman',
   uniqueAppName: '<your-app-name-here>',
   browser: 'Firefox',                 // browser to open test results with

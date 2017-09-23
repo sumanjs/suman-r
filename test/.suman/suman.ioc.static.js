@@ -9,7 +9,7 @@
 
 const http = require('http');
 
-module.exports = data => {  //load async deps for any of your suman tests
+module.exports = $core => {  //load async deps for any of your suman tests
 
   return {
 
