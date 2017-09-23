@@ -11,6 +11,7 @@ process.on('unhandledRejection', function (e) {
 });
 
 process.once('exit', function () {
+  console.log('\n');
   console.log(' ---- suman-r end ----');
 });
 
@@ -53,7 +54,7 @@ d.run(function () {
   // we use a domain because nothing else seemed to capture the errors properly
   process.stdin.resume().pipe(getStream('zoom'))
   .once('data', clearStdinTimeout)
-  .on('error', function (e) {
+  .on('error', function (e: any) {
     console.log(su.getCleanErrorString(e));
   });
 });
