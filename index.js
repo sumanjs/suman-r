@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var suman_utils_1 = require("suman-utils");
 process.on('uncaughtException', function (e) {
     console.error("<suman-r> has captured an 'uncaughtException' => \n " + suman_utils_1.default.getCleanErrorString(e));
@@ -9,6 +8,7 @@ process.on('unhandledRejection', function (e) {
     console.error("<suman-r> has captured an 'unhandledRejection' => \n " + suman_utils_1.default.getCleanErrorString(e));
 });
 process.once('exit', function () {
+    console.log('\n');
     console.log(' ---- suman-r end ----');
 });
 var chalk = require("chalk");
