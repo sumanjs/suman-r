@@ -37,7 +37,7 @@
     "dashdash": "^1.14.1",
     "suman-events": "latest",
     "suman-reporters": "latest",
-    "suman-utils": "0.0.73117",
+    "suman-utils": "latest",
     "tap-json-parser": "latest"
   },
   "devDependencies": {
