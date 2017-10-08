@@ -1,6 +1,12 @@
 
-# matching files
+### directories
+node_modules
+.idea
+test
+coverage
+.nyc_output
 
+#### matching files
 *.log
 *.ts
 *.json
@@ -8,21 +14,13 @@
 *.txt
 *.md
 
-# individual files
-
+### individual files
+package-lock.json
+yarn.lock
 .gitignore
 .npmignore
 .editorconfig
 suman.conf.js
 
-# directories
-
-node_modules
-.idea
-test
-coverage
-.nyc_output
-
-# inverse / negation
-
+### negation
 !*.d.ts
