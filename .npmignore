@@ -13,6 +13,7 @@ coverage
 *.sh
 *.txt
 *.md
+*.yml
 
 ### individual files
 package-lock.json
