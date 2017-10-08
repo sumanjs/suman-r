@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-"use strict";
+'use strict';
+Object.defineProperty(exports, "__esModule", { value: true });
 var suman_utils_1 = require("suman-utils");
 process.on('uncaughtException', function (e) {
     console.error("<suman-r> has captured an 'uncaughtException' => \n " + suman_utils_1.default.getCleanErrorString(e));
