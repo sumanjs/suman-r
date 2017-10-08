@@ -2,6 +2,7 @@ import parser from 'tap-json-parser';
 import {tb} from "./testpoint-broadcaster";
 import {events} from 'suman-events';
 import util = require('util');
+import log from './logging';
 
 /////////////////////////////////////////////////////////////
 

@@ -2,15 +2,16 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 var suman_utils_1 = require("suman-utils");
+var logging_1 = require("./lib/logging");
 process.on('uncaughtException', function (e) {
-    console.error("<suman-r> has captured an 'uncaughtException' => \n " + suman_utils_1.default.getCleanErrorString(e));
+    logging_1.default.error("<suman-r> has captured an 'uncaughtException' => \n " + suman_utils_1.default.getCleanErrorString(e));
 });
 process.on('unhandledRejection', function (e) {
-    console.error("<suman-r> has captured an 'unhandledRejection' => \n " + suman_utils_1.default.getCleanErrorString(e));
+    logging_1.default.error("<suman-r> has captured an 'unhandledRejection' => \n " + suman_utils_1.default.getCleanErrorString(e));
 });
 process.once('exit', function () {
     console.log('\n');
-    console.log(' ---- suman-r end ----');
+    logging_1.default.info(' ---- suman-r end ----');
 });
 var chalk = require("chalk");
 var dashdash = require("dashdash");
@@ -23,17 +24,17 @@ try {
     opts = parser.parse(process.argv);
 }
 catch (e) {
-    console.error(' => suman-r CLI parsing error: %s', e.message);
+    logging_1.default.error(' => suman-r CLI parsing error: %s', e.message);
     process.exit(1);
 }
 reporter = opts.reporter || 'std-reporter';
 register_reporter_1.registerReporter(reporter);
 var d = Domain.create();
 d.on('error', function (e) {
-    console.log(suman_utils_1.default.getCleanErrorString(e));
+    logging_1.default.error(suman_utils_1.default.getCleanErrorString(e));
 });
 var to = setTimeout(function () {
-    console.error(chalk.red('no input to suman-r stdin after 10 seconds, shutting down.'));
+    logging_1.default.error(chalk.red('no input to suman-r stdin after 10 seconds, shutting down.'));
     process.exit(1);
 }, 5000);
 var clearStdinTimeout = function () {
@@ -43,6 +44,6 @@ d.run(function () {
     process.stdin.resume().pipe(get_stream_1.getStream('zoom'))
         .once('data', clearStdinTimeout)
         .on('error', function (e) {
-        console.log(suman_utils_1.default.getCleanErrorString(e));
+        logging_1.default.error(suman_utils_1.default.getCleanErrorString(e));
     });
 });
