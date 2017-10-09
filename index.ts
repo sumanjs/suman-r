@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-import su from 'suman-utils';
+import su = require('suman-utils');
 import log from './lib/logging';
 
 process.on('uncaughtException', function (e) {

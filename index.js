@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
-var suman_utils_1 = require("suman-utils");
+var su = require("suman-utils");
 var logging_1 = require("./lib/logging");
 process.on('uncaughtException', function (e) {
-    logging_1.default.error("<suman-r> has captured an 'uncaughtException' => \n " + suman_utils_1.default.getCleanErrorString(e));
+    logging_1.default.error("<suman-r> has captured an 'uncaughtException' => \n " + su.getCleanErrorString(e));
 });
 process.on('unhandledRejection', function (e) {
-    logging_1.default.error("<suman-r> has captured an 'unhandledRejection' => \n " + suman_utils_1.default.getCleanErrorString(e));
+    logging_1.default.error("<suman-r> has captured an 'unhandledRejection' => \n " + su.getCleanErrorString(e));
 });
 process.once('exit', function () {
     console.log('\n');
@@ -31,7 +31,7 @@ reporter = opts.reporter || 'std-reporter';
 register_reporter_1.registerReporter(reporter);
 var d = Domain.create();
 d.on('error', function (e) {
-    logging_1.default.error(suman_utils_1.default.getCleanErrorString(e));
+    logging_1.default.error(su.getCleanErrorString(e));
 });
 var to = setTimeout(function () {
     logging_1.default.error(chalk.red('no input to suman-r stdin after 10 seconds, shutting down.'));
@@ -44,6 +44,6 @@ d.run(function () {
     process.stdin.resume().pipe(get_stream_1.getStream('zoom'))
         .once('data', clearStdinTimeout)
         .on('error', function (e) {
-        logging_1.default.error(suman_utils_1.default.getCleanErrorString(e));
+        logging_1.default.error(su.getCleanErrorString(e));
     });
 });
