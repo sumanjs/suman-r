@@ -16,7 +16,6 @@ coverage
 *.yml
 
 ### individual files
-package-lock.json
 yarn.lock
 .gitignore
 .npmignore
