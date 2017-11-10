@@ -5,6 +5,7 @@ node_modules
 test
 coverage
 .nyc_output
+scripts
 
 #### matching files
 *.log

@@ -27,7 +27,7 @@
     "text"
   ],
   "author": "Olegzandr VD",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/sumanjs/suman-r/issues"
   },
@@ -35,6 +35,7 @@
   "dependencies": {
     "chalk": "^2.1.0",
     "dashdash": "^1.14.1",
+    "json-stdio": "latest",
     "suman-events": "latest",
     "suman-reporters": "latest",
     "suman-utils": "latest",

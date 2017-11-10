@@ -1,0 +1,67 @@
+'use strict';
+
+import chalk = require('chalk');
+import {events} from 'suman-events';
+import su from 'suman-utils';
+import EE = require('events');
+import path = require('path');
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+const name = ' [suman-r] ';
+export const log = {
+  info: console.log.bind(console, chalk.gray.bold(name)),
+  warning: console.error.bind(console, chalk.yellow(name)),
+  error: console.error.bind(console, chalk.red(name)),
+  good: console.log.bind(console, chalk.cyan(name)),
+  veryGood: console.log.bind(console, chalk.green(name))
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+export const tb = new EE();
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+export const options: Array<any> = [
+  {
+    names: ['reporter', 'reporters', 'reporter-paths', 'reporters-path'],
+    type: 'string',
+    help: 'Choose a desired reporter by name or path.'
+  }
+
+];
+
+////////////////////////////////////////////////////////////////////////////////////////
+
+export const registerReporter = function (name: string, projectRoot: string) {
+
+  log.info('registering reporter with name => ', name);
+  let reporterFn, pth;
+
+  try {
+    pth = require.resolve(name);
+    log.info('reporter being loaded with the following path:');
+    log.info(pth);
+    reporterFn = require(pth);
+  }
+  catch (err) {
+    try {
+      pth = `suman-reporters/modules/${name}`;
+      log.info(`reporter being loaded with the following resolved name '${chalk.magenta(pth)}'.`);
+      reporterFn = require(pth);
+    }
+    catch (err) {
+      pth = path.resolve(projectRoot + `/${name}`);
+      log.info(`reporter being loaded with the following resolved name '${chalk.magenta(pth)}'.`);
+      reporterFn = require(pth);
+    }
+  }
+
+  if (!reporterFn) {
+    throw new Error(`suman-r could not load a reporter using the following name '${name}.'`);
+  }
+
+  reporterFn = reporterFn.loadReporter || reporterFn.default || reporterFn;
+  reporterFn.call(null, tb, {});
+};
