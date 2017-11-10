@@ -21,6 +21,7 @@
   },
   "compileOnSave": false,
   "exclude": [
+    ".git",
     "test",
     "node_modules"
   ]
