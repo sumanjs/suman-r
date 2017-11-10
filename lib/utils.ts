@@ -34,9 +34,9 @@ export const options: Array<any> = [
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
-export const registerReporter = function (name: string, projectRoot: string) {
+export const registerReporter = function (projectRoot: string, name: string) {
 
-  log.info('registering reporter with name => ', name);
+  log.info('Suman-R is registering reporter with name => ', name);
   let reporterFn, pth;
 
   try {

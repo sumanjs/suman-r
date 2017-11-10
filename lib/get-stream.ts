@@ -10,7 +10,7 @@ import {events} from 'suman-events';
 import jsonStdio = require('json-stdio');
 
 //project
-import {tb, log, js} from "./utils";
+import {tb, log} from "./utils";
 
 //////////////////////////////////////////////////////////////////////////////////////
 

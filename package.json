@@ -36,6 +36,7 @@
     "chalk": "^2.1.0",
     "dashdash": "^1.14.1",
     "json-stdio": "latest",
+    "residence": "latest",
     "suman-events": "latest",
     "suman-reporters": "latest",
     "suman-utils": "latest",
@@ -44,7 +45,6 @@
   "devDependencies": {
     "@types/chalk": "^0.4.31",
     "@types/core-js": "^0.9.43",
-    "@types/node": "^8.0.28",
-    "suman-types": "latest"
+    "@types/node": "^8.0.28"
   }
 }

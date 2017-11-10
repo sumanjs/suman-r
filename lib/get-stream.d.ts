@@ -1,1 +1,4 @@
-export declare const getStream: (type: string) => any;
+/// <reference types="node" />
+import { Transform } from "stream";
+export declare const getTestPointStream: () => Transform;
+export declare const getJSONStdioStream: () => Transform;

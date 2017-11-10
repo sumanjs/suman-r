@@ -1,49 +1,55 @@
 #!/usr/bin/env node
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
+var Domain = require("domain");
 var su = require("suman-utils");
-var logging_1 = require("./lib/logging");
+var chalk = require("chalk");
+var dashdash = require('dashdash');
+var residence = require("residence");
+var utils_1 = require("./lib/utils");
+var get_stream_1 = require("./lib/get-stream");
 process.on('uncaughtException', function (e) {
-    logging_1.default.error("<suman-r> has captured an 'uncaughtException' => \n " + su.getCleanErrorString(e));
+    utils_1.log.error("<suman-r> has captured an 'uncaughtException' => \n " + su.getCleanErrorString(e));
 });
 process.on('unhandledRejection', function (e) {
-    logging_1.default.error("<suman-r> has captured an 'unhandledRejection' => \n " + su.getCleanErrorString(e));
+    utils_1.log.error("<suman-r> has captured an 'unhandledRejection' => \n " + su.getCleanErrorString(e));
 });
 process.once('exit', function () {
     console.log('\n');
-    logging_1.default.info(' ---- suman-r end ----');
+    utils_1.log.info(' ---- suman-r end ----');
 });
-var chalk = require("chalk");
-var dashdash = require("dashdash");
-var get_stream_1 = require("./lib/get-stream");
-var register_reporter_1 = require("./lib/register-reporter");
-var suman_r_options_1 = require("./lib/suman-r-options");
-var Domain = require("domain");
-var opts, reporter, parser = dashdash.createParser({ options: suman_r_options_1.options });
+var projectRoot = residence.findProjectRoot(process.cwd());
+if (!projectRoot) {
+    utils_1.log.error('suman-r could not find a project root given your current working directory.');
+    utils_1.log.error('cwd: ', process.cwd());
+    throw new Error('suman-r could not find a project root given cwd.');
+}
+var opts, reporter, parser = dashdash.createParser({ options: utils_1.options });
 try {
     opts = parser.parse(process.argv);
 }
 catch (e) {
-    logging_1.default.error(' => suman-r CLI parsing error: %s', e.message);
+    utils_1.log.error(' => suman-r CLI parsing error: %s', e.message);
     process.exit(1);
 }
-reporter = opts.reporter || 'std-reporter';
-register_reporter_1.registerReporter(reporter);
-var d = Domain.create();
-d.on('error', function (e) {
-    logging_1.default.error(su.getCleanErrorString(e));
-});
+utils_1.registerReporter(projectRoot, opts.reporter || 'suman-reporters/modules/std-reporter');
 var to = setTimeout(function () {
-    logging_1.default.error(chalk.red('no input to suman-r stdin after 10 seconds, shutting down.'));
+    utils_1.log.error(chalk.red('no input to suman-r stdin after 35 seconds, shutting down.'));
     process.exit(1);
-}, 5000);
+}, 35000);
 var clearStdinTimeout = function () {
     clearTimeout(to);
 };
-d.run(function () {
-    process.stdin.resume().pipe(get_stream_1.getStream('zoom'))
-        .once('data', clearStdinTimeout)
-        .on('error', function (e) {
-        logging_1.default.error(su.getCleanErrorString(e));
+{
+    var d = Domain.create();
+    d.on('error', function (e) {
+        utils_1.log.error(su.getCleanErrorString(e));
     });
-});
+    d.run(function () {
+        process.stdin.resume().pipe(get_stream_1.getJSONStdioStream())
+            .once('data', clearStdinTimeout)
+            .on('error', function (e) {
+            utils_1.log.error(su.getCleanErrorString(e));
+        });
+    });
+}
