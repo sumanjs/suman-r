@@ -8,7 +8,9 @@ import assert = require('assert');
 //npm
 import parser from 'tap-json-parser';
 import {events} from 'suman-events';
-import jsonStdio = require('json-stdio');
+import JSONStdio = require('json-stdio');
+import chalk = require('chalk');
+import _ = require('lodash');
 
 //project
 import {tb, log} from "./utils";
@@ -45,20 +47,43 @@ export const getTestPointStream = function () {
 
 };
 
+const kindMap = <any> {
+  warning: 'yellow',
+  error: 'red',
+  info: 'cyan',
+  goodnews: 'green',
+  good: 'green',
+  verygood: 'green'
+};
+
+let logMessages = function (kind: string, messages: Array<string>) {
+  let kindMapSearch = String(kind).trim().toLowerCase();
+  let method = kindMap[kindMapSearch] || 'red';
+  let fn = (chalk[method] || chalk.red).bold;
+  _.flattenDeep([messages]).forEach(function (m: string) {
+    log.info(fn(m));
+  });
+};
+
 export const getJSONStdioStream = function () {
 
   let p;
 
-  p = jsonStdio.createParser();
+  p = JSONStdio.createParser();
 
-  let stdEventName = jsonStdio.stdEventName;
+  let stdEventName = JSONStdio.stdEventName;
   assert(typeof stdEventName === 'string',
-    `Suman implementation error: 'json-stdio' library does not export expected property.`);
+    `Suman implementation error: 'json-stdio' library does not export an expected property.`);
 
-  p.on(stdEventName, function (obj: Object) {
+  p.on(stdEventName, function (obj: any) {
 
     if (!obj) {
       log.warning(`Suman implementation warning: no json-stdio object passed to '${stdEventName}' handler.`);
+      return;
+    }
+
+    if (obj.sumanMessage === true) {
+      logMessages(obj.kind, obj.messages || obj.message);
       return;
     }
 
