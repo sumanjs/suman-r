@@ -11,6 +11,8 @@ import {events} from 'suman-events';
 import JSONStdio = require('json-stdio');
 import chalk = require('chalk');
 import _ = require('lodash');
+import su = require('suman-utils');
+
 
 //project
 import {tb, log} from "./utils";
@@ -67,9 +69,7 @@ let logMessages = function (kind: string, messages: Array<string>) {
 
 export const getJSONStdioStream = function () {
 
-  let p;
-
-  p = JSONStdio.createParser();
+  let p = JSONStdio.createParser(su.constants.JSON_STDIO_SUMAN_R);
 
   let stdEventName = JSONStdio.stdEventName;
   assert(typeof stdEventName === 'string',
