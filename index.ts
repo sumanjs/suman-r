@@ -99,10 +99,17 @@ let clearStdinTimeout = function () {
   d.run(function () {
 
     // we use a domain because nothing else seemed to capture the errors properly
-    process.stdin.resume().pipe(getJSONStdioStream())
+    process.stdin.resume()
+    .pipe(getJSONStdioStream())
     .once('data', clearStdinTimeout)
     .on('error', function (e: any) {
       log.error(su.getCleanErrorString(e));
+    })
+    .once('end', function(){
+      log.info('suman-refine stdin has ended.');
+    })
+    .once('finish', function(){
+      log.info('suman-refine stdin has finished.');
     });
 
   });

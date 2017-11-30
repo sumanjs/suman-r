@@ -46,10 +46,17 @@ var clearStdinTimeout = function () {
         utils_1.log.error(su.getCleanErrorString(e));
     });
     d.run(function () {
-        process.stdin.resume().pipe(get_stream_1.getJSONStdioStream())
+        process.stdin.resume()
+            .pipe(get_stream_1.getJSONStdioStream())
             .once('data', clearStdinTimeout)
             .on('error', function (e) {
             utils_1.log.error(su.getCleanErrorString(e));
+        })
+            .once('end', function () {
+            utils_1.log.info('suman-refine stdin has ended.');
+        })
+            .once('finish', function () {
+            utils_1.log.info('suman-refine stdin has finished.');
         });
     });
 }

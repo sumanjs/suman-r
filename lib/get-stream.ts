@@ -69,7 +69,8 @@ let logMessages = function (kind: string, messages: Array<string>) {
 
 export const getJSONStdioStream = function () {
 
-  let p = JSONStdio.createParser(su.constants.JSON_STDIO_SUMAN_R);
+  let p = JSONStdio.createParser();
+  // let p = JSONStdio.createParser(su.constants.JSON_STDIO_SUMAN_R);
 
   let stdEventName = JSONStdio.stdEventName;
   assert(typeof stdEventName === 'string',
