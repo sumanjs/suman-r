@@ -1,4 +1,4 @@
-# Suman-R
+# Suman-R (Suman-Refine)
 
 Use this tool at the command line like so:
 

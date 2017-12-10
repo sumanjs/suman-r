@@ -7,4 +7,4 @@ MYPATH="$DIRN/$EXECDIR";
 X="$(cd $(dirname ${MYPATH}) && pwd)/$(basename ${MYPATH})"
 
 echo "X => $X"
-node --inspect-brk "$X/index.js"
+node --inspect-brk=54031 "$X/index.js"

@@ -77,6 +77,8 @@ export const getJSONStdioStream = function () {
     `Suman implementation error: 'json-stdio' library does not export an expected property.`);
 
   p.on(stdEventName, function (obj: any) {
+  
+    debugger;
 
     if (!obj) {
       log.warning(`Suman implementation warning: no json-stdio object passed to '${stdEventName}' handler.`);
@@ -89,8 +91,9 @@ export const getJSONStdioStream = function () {
     }
 
     const msgType = String(obj.messageType);
-
+    
     if (msgType in events) {
+      console.log('msgType => ', msgType);
       tb.emit(msgType, obj);
     }
     else {
