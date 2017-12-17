@@ -4,6 +4,9 @@
   "description": "Suman reporter CLI / writable pipe",
   "bin": {
     "suman-r": "index.js",
+    "suman-refine": "index.js",
+    "@suman": "index.js",
+    "+suman": "index.js",
     "suman-r-inspect": "cli/inspect.sh"
   },
   "main": "index.js",

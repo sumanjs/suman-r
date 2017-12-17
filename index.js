@@ -24,7 +24,7 @@ if (!projectRoot) {
     utils_1.log.error('cwd: ', process.cwd());
     throw new Error('suman-r could not find a project root given cwd.');
 }
-var opts, reporter, parser = dashdash.createParser({ options: utils_1.options });
+var opts, parser = dashdash.createParser({ options: utils_1.options });
 try {
     opts = parser.parse(process.argv);
 }
@@ -32,14 +32,18 @@ catch (e) {
     utils_1.log.error(' => suman-r CLI parsing error: %s', e.message);
     process.exit(1);
 }
-utils_1.registerReporter(projectRoot, opts.reporter || 'suman-reporters/modules/std-reporter');
+var defaultReporterPath = 'suman-reporters/modules/std-reporter';
+utils_1.registerReporter(projectRoot, opts.reporter || defaultReporterPath);
 var to = setTimeout(function () {
     utils_1.log.error(chalk.red('no input to suman-r stdin after 35 seconds, shutting down.'));
     process.exit(1);
 }, 35000);
 var clearStdinTimeout = function () {
+    su.vgt(4) && utils_1.log.info('Received first piece of stdin data.');
     clearTimeout(to);
 };
+{
+}
 {
     var d = Domain.create();
     d.on('error', function (e) {
@@ -47,15 +51,17 @@ var clearStdinTimeout = function () {
     });
     d.run(function () {
         process.stdin.resume()
-            .pipe(get_stream_1.getJSONStdioStream())
             .once('data', clearStdinTimeout)
+            .pipe(get_stream_1.getJSONStdioStream())
             .on('error', function (e) {
             utils_1.log.error(su.getCleanErrorString(e));
         })
             .once('end', function () {
+            console.log();
             utils_1.log.info('suman-refine stdin has ended.');
         })
             .once('finish', function () {
+            console.log();
             utils_1.log.info('suman-refine stdin has finished.');
         });
     });

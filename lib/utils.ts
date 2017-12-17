@@ -2,7 +2,7 @@
 
 import chalk = require('chalk');
 import {events} from 'suman-events';
-import su from 'suman-utils';
+import su = require('suman-utils');
 import EE = require('events');
 import path = require('path');
 
@@ -36,24 +36,28 @@ export const options: Array<any> = [
 
 export const registerReporter = function (projectRoot: string, name: string) {
 
-  log.info('Suman-R is registering reporter with name => ', name);
+  if(su.vgt(5)){
+    log.info(`Suman-R is registering reporter with name => "${name}".`);
+  }
+ 
+  
   let reporterFn, pth;
 
   try {
     pth = require.resolve(name);
-    log.info('reporter being loaded with the following path:');
-    log.info(pth);
+    su.vgt(5) && log.info('reporter being loaded with the following path:');
+    su.vgt(5) && log.info(pth);
     reporterFn = require(pth);
   }
   catch (err) {
     try {
       pth = `suman-reporters/modules/${name}`;
-      log.info(`reporter being loaded with the following resolved name '${chalk.magenta(pth)}'.`);
+      su.vgt(5) && log.info(`reporter being loaded with the following resolved name '${chalk.magenta(pth)}'.`);
       reporterFn = require(pth);
     }
     catch (err) {
       pth = path.resolve(projectRoot + `/${name}`);
-      log.info(`reporter being loaded with the following resolved name '${chalk.magenta(pth)}'.`);
+      su.vgt(5) && log.info(`reporter being loaded with the following resolved name '${chalk.magenta(pth)}'.`);
       reporterFn = require(pth);
     }
   }

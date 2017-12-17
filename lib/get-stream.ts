@@ -9,10 +9,9 @@ import assert = require('assert');
 import parser from 'tap-json-parser';
 import {events} from 'suman-events';
 import JSONStdio = require('json-stdio');
-import chalk = require('chalk');
+import chalk from 'chalk';
 import _ = require('lodash');
 import su = require('suman-utils');
-
 
 //project
 import {tb, log} from "./utils";
@@ -20,17 +19,19 @@ import {tb, log} from "./utils";
 //////////////////////////////////////////////////////////////////////////////////////
 
 export const getTestPointStream = function () {
-
+  
   let p;
-
+  
   p = parser();
-
+  
   p.on('testpoint', function (testpoint: Object) {
-
+    
+    testpoint = testpoint.testCase || testpoint;
+    
     debugger;
-
+    
     tb.emit(String(events.TEST_CASE_END), testpoint);
-
+    
     if (testpoint.skip) {
       tb.emit(String(events.TEST_CASE_SKIPPED), testpoint);
     }
@@ -44,9 +45,9 @@ export const getTestPointStream = function () {
       tb.emit(String(events.TEST_CASE_FAIL), testpoint);
     }
   });
-
+  
   return p;
-
+  
 };
 
 const kindMap = <any> {
@@ -68,41 +69,40 @@ let logMessages = function (kind: string, messages: Array<string>) {
 };
 
 export const getJSONStdioStream = function () {
-
+  
   let p = JSONStdio.createParser();
   // let p = JSONStdio.createParser(su.constants.JSON_STDIO_SUMAN_R);
-
+  
   let stdEventName = JSONStdio.stdEventName;
   assert(typeof stdEventName === 'string',
     `Suman implementation error: 'json-stdio' library does not export an expected property.`);
-
-  p.on(stdEventName, function (obj: any) {
   
+  p.on(stdEventName, function (obj: any) {
+    
     debugger;
-
+    
     if (!obj) {
       log.warning(`Suman implementation warning: no json-stdio object passed to '${stdEventName}' handler.`);
       return;
     }
-
+    
     if (obj.sumanMessage === true) {
       logMessages(obj.kind, obj.messages || obj.message);
       return;
     }
-
+    
     const msgType = String(obj.messageType);
     
     if (msgType in events) {
-      console.log('msgType => ', msgType);
       tb.emit(msgType, obj);
     }
     else {
       log.warning(' => json stdio object "messageType" property was not a key in suman-events.');
       log.warning(' => json stido object value:', util.inspect(obj));
     }
-
+    
   });
-
+  
   return p;
-
+  
 };
