@@ -1,6 +1,6 @@
 {
   "name": "suman-r",
-  "version": "0.0.1004",
+  "version": "0.0.1005",
   "description": "Suman reporter CLI / writable pipe",
   "bin": {
     "suman-r": "index.js",
