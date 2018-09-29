@@ -1,7 +1,6 @@
 'use strict';
 
 //core
-import {Stream, Transform} from "stream";
 import util = require('util');
 import assert = require('assert');
 
@@ -11,10 +10,10 @@ import {events} from 'suman-events';
 import JSONStdio = require('json-stdio');
 import chalk from 'chalk';
 import _ = require('lodash');
-import su = require('suman-utils');
+import log from './logger';
 
 //project
-import {tb, log} from "./utils";
+import {tb} from "./utils";
 
 //////////////////////////////////////////////////////////////////////////////////////
 

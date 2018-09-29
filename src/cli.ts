@@ -7,13 +7,14 @@ import util = require('util');
 
 //npm
 import su = require('suman-utils');
-import chalk = require('chalk');
+import chalk from 'chalk';
 const dashdash = require('dashdash');
 import residence = require('residence');
 
 //project
-import {log, registerReporter, options} from './lib/utils';
-import {getTestPointStream, getJSONStdioStream} from "./lib/get-stream";
+import log from './logger';
+import {registerReporter, options} from './utils';
+import {getTestPointStream, getJSONStdioStream} from "./get-stream";
 
 process.on('uncaughtException', function (e) {
   log.error(`<suman-r> has captured an 'uncaughtException' => \n ${su.getCleanErrorString(e)}`);

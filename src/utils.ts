@@ -1,27 +1,21 @@
 'use strict';
 
-import chalk = require('chalk');
+import chalk from 'chalk';
 import {events} from 'suman-events';
 import su = require('suman-utils');
 import EE = require('events');
 import path = require('path');
+import log from './logger';
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
-const name = ' [suman-r] ';
-export const log = {
-  info: console.log.bind(console, chalk.gray.bold(name)),
-  warning: console.error.bind(console, chalk.yellow(name)),
-  error: console.error.bind(console, chalk.red(name)),
-  good: console.log.bind(console, chalk.cyan(name)),
-  veryGood: console.log.bind(console, chalk.green(name))
-};
+export interface IFooBar {
+  dummy: string
+}
 
-//////////////////////////////////////////////////////////////////////////////////////
 
 export const tb = new EE();
 
-//////////////////////////////////////////////////////////////////////////////////////
 
 export const options: Array<any> = [
   {
@@ -32,7 +26,6 @@ export const options: Array<any> = [
 
 ];
 
-////////////////////////////////////////////////////////////////////////////////////////
 
 export const registerReporter = function (projectRoot: string, name: string) {
 
