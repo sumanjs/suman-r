@@ -6,10 +6,10 @@ test
 coverage
 .nyc_output
 scripts
+src
 
 #### matching files
 *.log
-*.ts
 *.json
 *.sh
 *.txt
@@ -23,5 +23,3 @@ yarn.lock
 .editorconfig
 suman.conf.js
 
-### negation
-!*.d.ts
