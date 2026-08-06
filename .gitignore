@@ -14,3 +14,7 @@ yarn.lock
 
 ### inverse
 !dist/readme.md
+tmp
+temp
+tmp/worktrees
+temp/worktrees
